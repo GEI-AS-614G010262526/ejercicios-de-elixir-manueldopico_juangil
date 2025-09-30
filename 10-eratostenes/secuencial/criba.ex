@@ -21,7 +21,7 @@ end
   def criba([h | t]) do
     [h | criba(filter(h,t))]
   end
-  end
+end
 
 
 IO.inspect Criba.primos(30)
