@@ -9,14 +9,8 @@ realizarse los ejercicios.
 
 ## Miembros del equipo
 
-Cada equipo está formado necesariamente por dos o tres personas, según
-lo establecido por el profesor al comienzo del cuatrimestre.
-
-A continuación se han de anotar los datos de los integrantes del equipo:
-
-- Apellido1 Apellido2, Nombre : github username : udc username
-- Apellido1 Apellido2, Nombre : github username : udc username
-- Apellido1 Apellido2, Nombre : github username : udc username 
+- Gil Arregui, Juan : JuanGilArregui : juan.gil.arregui@udc.es
+- Dopico Caneiro, Manuel : manudc12 : manuel.dopico.caneiro@udc.es
 
 **N.B.:** Los ejercicios no recibirán ninguna corrección si los datos
 de los miembros del equipo no están anotados en este documento o el
