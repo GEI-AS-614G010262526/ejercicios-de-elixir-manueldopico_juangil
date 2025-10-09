@@ -22,6 +22,3 @@ end
     [h | criba(filter(h,t))]
   end
 end
-
-
-IO.inspect Criba.primos(30)
