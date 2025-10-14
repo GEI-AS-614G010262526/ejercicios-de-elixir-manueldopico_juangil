@@ -66,9 +66,4 @@ def avail() do
       num -> num
     end
   end
-
-
-  ##Para la versión 2 --> link(¿?) cambiar configuracion con trap.exist --> este se murio
-  ##Para la versión 3 --> nodos
-
 end
