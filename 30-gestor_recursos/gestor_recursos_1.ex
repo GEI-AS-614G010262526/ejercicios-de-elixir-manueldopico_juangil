@@ -1,3 +1,4 @@
+##1. No distribuido
 defmodule Servidor do
 
   ##start del servidor
@@ -24,7 +25,7 @@ defmodule Servidor do
       end
 
       {:release,from,recurso}-> case Map.get(asignados, recurso) do
-        ^from ->
+        from ->
           nuevo_asignados = Map.delete(asignados, recurso)
           send(from, :ok)
           loop([recurso|disponibles],nuevo_asignados)
@@ -65,9 +66,4 @@ def avail() do
       num -> num
     end
   end
-
-
-  ##Para la versión 2 --> link(¿?) cambiar configuracion con trap.exist --> este se murio
-  ##Para la versión 3 --> nodos
-
 end
