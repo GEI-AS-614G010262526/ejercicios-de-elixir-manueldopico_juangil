@@ -9,13 +9,14 @@ defmodule Criba do
   def rango(x, m), do: [x | rango(x + 1, m)]
 
   def filter(_n, []), do: []
-  def filter(n,[h|t]) do
-    #no lo guardamos si es multiplo
-     if (rem(h,n) == 0) do filter(n, t)
 
-    else  [h| filter(n,t)]
+  def filter(n, [h | t]) when rem(h, n) == 0 do
+    filter(n, t)
   end
-end
+
+  def filter(n, [h | t]) do
+    [h | filter(n, t)]
+  end
 
   def criba([]), do: []
   def criba([h | t]) do

@@ -23,6 +23,12 @@ end
         [recurso|resto] ->
           ##linkeamos
           Process.link(from)
+
+          nodo_cliente = node(from)
+            if nodo_cliente != node() do
+              Node.monitor(nodo_cliente, true)
+            end
+
           send(from,{:ok,recurso})
           ##guarda en el mapa asignados que el recurso recurso ahora pertenece al cliente con pid from
           nuevo_asignados = Map.put(asignados, recurso, from)
@@ -69,6 +75,22 @@ end
           nuevo_disponibles = recursos_perdidos ++ disponibles
 
           loop(nuevo_disponibles, nuevo_asignados)
+
+      ## manejar la caída de un nodo remoto
+      {:nodedown, nodo} ->
+        recursos_perdidos =
+          asignados
+          |> Enum.filter(fn {_r, p} -> node(p) == nodo end) #nos quedamos solo con las entradas donde el PID pertenece al nodo caído.
+          |> Enum.map(fn {r, _} -> r end)
+
+        if recursos_perdidos != [] do
+          IO.puts("Nodo #{inspect(nodo)} cayó, libera#{inspect(recursos_perdidos)}")
+        end
+
+        nuevo_asignados = Map.drop(asignados, recursos_perdidos)
+        nuevo_disponibles = recursos_perdidos ++ disponibles
+
+        loop(nuevo_disponibles, nuevo_asignados)
     end
   end
 
