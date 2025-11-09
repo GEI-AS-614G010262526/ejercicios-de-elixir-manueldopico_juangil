@@ -67,6 +67,7 @@ defmodule ServidoresFederados do
   end
 
   #una función para registrar actores (creo que es necesario para meterlos y probar)
+  @impl true
   def handle_call({:register_actor, username, profile}, _from, state) do
     new_actors = Map.put(state.actors, username, %{profile: profile, inbox: []})
     {:reply, {:ok, "Actor registrado"}, %{state | actors: new_actors}}
@@ -104,7 +105,7 @@ defmodule ServidoresFederados do
         if receiver_server == state.name do
     case post_message_local(receiver, message, state) do
           {:ok, msg, new_state} -> {:reply, {:ok, msg}, new_state}
-          {:error, reason} -> {:reply, {:error, reason}, state}
+          {:error, reason, new_state} -> {:reply, {:error, reason}, new_state}
         end
         else
           {:reply, post_message_federado(receiver_server, receiver, message, state.name), state}
